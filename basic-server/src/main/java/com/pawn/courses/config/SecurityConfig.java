@@ -3,6 +3,7 @@ package com.pawn.courses.config;
 import com.pawn.courses.config.auth.MyAuthenticationSuccessHandler;
 import com.pawn.courses.config.auth.MyExpiredSessionStrategy;
 import com.pawn.courses.config.auth.MyUserDetailsService;
+import com.pawn.courses.config.auth.MylogoutSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -13,8 +14,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
 import javax.annotation.Resource;
+import javax.sql.DataSource;
 
 @Configuration
 // 开启方法级别的权限控制
@@ -27,13 +31,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
+    @Resource
+    private MylogoutSuccessHandler mylogoutSuccessHandler;
+
+    @Resource
+    private DataSource dataSource;
+
     // 有两种认证方式httpBasic认证  formLogin认证
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.rememberMe().
+        http.logout()
+                .logoutUrl("/signUrl").
+                // logoutSuccessUrl 和 logoutSuccessHandler只能用一个 否则后者将会失效
+//                .logoutSuccessUrl("/login.html").
+                // logoutSuccessHandler可以做一些复杂的业务逻辑 例如登陆时间的统计
+                logoutSuccessHandler(mylogoutSuccessHandler).
+                deleteCookies("JSESSIONID").
+                and().
+                rememberMe().
                 rememberMeParameter("remember-me-new").
                 rememberMeCookieName("remember-me-cookie").
                 tokenValiditySeconds(2 * 24 * 60 * 60).
+                // 将记住密码功能添加
+                tokenRepository(persistentTokenRepository()).
                 and().
                 csrf().disable().formLogin()//开启formLogin认证
                 .loginPage("/login.html")
@@ -45,7 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .successHandler(myAuthenticationSuccessHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login.html","/login", "/kaptcha","/smscode","/smslogin").permitAll()
+                .antMatchers("/login.html","/login", "/kaptcha","/smscode","/smslogin","/logoutSuccessUrl.html").permitAll()
                 .antMatchers("/index").authenticated()
                 .anyRequest().access("@rbacService.hasPermission(request,authentication)")
                 // <---------------之前的静态加载start-------------------->
@@ -102,5 +122,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public PersistentTokenRepository persistentTokenRepository(){
+
+        JdbcTokenRepositoryImpl jdbcTokenRepository = new JdbcTokenRepositoryImpl();
+        jdbcTokenRepository.setDataSource(dataSource);
+
+        return jdbcTokenRepository;
+
     }
 }
