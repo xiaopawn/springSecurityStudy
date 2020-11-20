@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6be9aa39-6df7-4610-b2b5-56db4403e0e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/auth/imagecode/CaptchaConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/basic-server/src/main/resources/kaptcha.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/auth/MyAuthenticationFailureHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/auth/imagecode/CaptchaCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/auth/imagecode/CaptchaFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/controller/CaptchaCodeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/utils/MyContants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/basic-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/basic-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/auth/imagecode/CaptchaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/auth/imagecode/CaptchaConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/basic-server/src/main/resources/static/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/basic-server/src/main/resources/static/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +70,9 @@
     <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.pawn.courses.config.auth" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\IDEAWork\springSecurityStudy\springSecurityStudy\basic-server\src\main\resources" />
       <recent name="D:\IDEAWork\springSecurityStudy\springSecurityStudy\basic-server\src\main\resources\sql" />
@@ -107,7 +115,9 @@
       <updated>1605683556153</updated>
       <workItem from="1605683557268" duration="1851000" />
       <workItem from="1605685423711" duration="7526000" />
-      <workItem from="1605746446693" duration="15756000" />
+      <workItem from="1605746446693" duration="17125000" />
+      <workItem from="1605789971469" duration="2096000" />
+      <workItem from="1605852756618" duration="11261000" />
     </task>
     <servers />
   </component>
@@ -115,73 +125,96 @@
     <option name="version" value="3" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="249" y="0" key="#Project_Structure" timestamp="1605790640612">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="249" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1605790640612" />
     <state x="223" y="67" width="1089" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605778059607">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="223" y="67" width="1089" height="715" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1605778059607" />
-    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1605767655652">
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser" timestamp="1605856467790">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1605767655651" />
+    <state x="574" y="117" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1605856467790" />
+    <state width="471" height="466" key="DebuggerActiveHint" timestamp="1605861838945">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="471" height="466" key="DebuggerActiveHint/0.0.1536.824@0.0.1536.824" timestamp="1605861838945" />
     <state x="549" y="119" key="FileChooserDialogImpl" timestamp="1605683743229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="549" y="119" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1605683743229" />
-    <state width="1493" height="177" key="GridCell.Tab.0.bottom" timestamp="1605778075604">
+    <state width="1493" height="243" key="GridCell.Tab.0.bottom" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605778075604" />
-    <state width="1493" height="177" key="GridCell.Tab.0.center" timestamp="1605778075604">
+    <state width="1493" height="243" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.0.center" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605778075604" />
-    <state width="1493" height="177" key="GridCell.Tab.0.left" timestamp="1605778075604">
+    <state width="1493" height="243" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.0.left" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605778075604" />
-    <state width="1493" height="177" key="GridCell.Tab.0.right" timestamp="1605778075604">
+    <state width="1493" height="243" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.0.right" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605778075604" />
-    <state width="1493" height="177" key="GridCell.Tab.1.bottom" timestamp="1605778075604">
+    <state width="1493" height="243" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.1.bottom" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605778075604" />
-    <state width="1493" height="177" key="GridCell.Tab.1.center" timestamp="1605778075604">
+    <state width="1493" height="243" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.1.center" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1605778075604" />
-    <state width="1493" height="177" key="GridCell.Tab.1.left" timestamp="1605778075604">
+    <state width="1493" height="243" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.1.left" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1605778075604" />
-    <state width="1493" height="177" key="GridCell.Tab.1.right" timestamp="1605778075604">
+    <state width="1493" height="243" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.1.right" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="177" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1605778075604" />
-    <state width="1493" height="243" key="GridCell.Tab.2.bottom" timestamp="1605773458439">
+    <state width="1493" height="243" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.2.bottom" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="243" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605773458439" />
-    <state width="1493" height="243" key="GridCell.Tab.2.center" timestamp="1605773458439">
+    <state width="1493" height="243" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.2.center" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="243" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1605773458439" />
-    <state width="1493" height="243" key="GridCell.Tab.2.left" timestamp="1605773458439">
+    <state width="1493" height="243" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.2.left" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="243" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1605773458439" />
-    <state width="1493" height="243" key="GridCell.Tab.2.right" timestamp="1605773458439">
+    <state width="1493" height="243" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state width="1493" height="243" key="GridCell.Tab.2.right" timestamp="1605864427384">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="243" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1605773458439" />
+    <state width="1493" height="243" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1605864427384" />
+    <state x="299" y="67" key="Maven.ArtifactSearchDialog" timestamp="1605856681926">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="299" y="67" key="Maven.ArtifactSearchDialog/0.0.1536.824@0.0.1536.824" timestamp="1605856681926" />
     <state x="355" y="0" key="SettingsEditor" timestamp="1605683767964">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="355" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1605683767964" />
-    <state x="425" y="66" width="670" height="676" key="search.everywhere.popup" timestamp="1605689389777">
+    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup" timestamp="1605857612348">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="66" width="670" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1605689389777" />
+    <state x="425" y="66" width="672" height="676" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1605857612348" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/basic-server/src/main/java/com/pawn/courses/config/auth/MyAuthenticationFailureHandler.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

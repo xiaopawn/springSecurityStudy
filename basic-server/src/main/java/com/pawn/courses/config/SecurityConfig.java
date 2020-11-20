@@ -1,9 +1,7 @@
 package com.pawn.courses.config;
 
-import com.pawn.courses.config.auth.MyAuthenticationSuccessHandler;
-import com.pawn.courses.config.auth.MyExpiredSessionStrategy;
-import com.pawn.courses.config.auth.MyUserDetailsService;
-import com.pawn.courses.config.auth.MylogoutSuccessHandler;
+import com.pawn.courses.config.auth.*;
+import com.pawn.courses.config.auth.imagecode.CaptchaFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 
@@ -32,15 +31,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private MyAuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     @Resource
+    private MyAuthenticationFailureHandler myAuthenticationFailureHandler;
+
+    @Resource
     private MylogoutSuccessHandler mylogoutSuccessHandler;
 
     @Resource
     private DataSource dataSource;
 
+    @Resource
+    private CaptchaFilter captchaFilter;
+
     // 有两种认证方式httpBasic认证  formLogin认证
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.logout()
+        http.addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class).
+                logout()
                 .logoutUrl("/signUrl").
                 // logoutSuccessUrl 和 logoutSuccessHandler只能用一个 否则后者将会失效
 //                .logoutSuccessUrl("/login.html").
@@ -63,9 +69,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 登陆成功默认跳转的url 资源路径
 //                .defaultSuccessUrl("/index")
                 .successHandler(myAuthenticationSuccessHandler)
+                .failureHandler(myAuthenticationFailureHandler)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/login.html","/login", "/kaptcha","/smscode","/smslogin","/logoutSuccessUrl.html").permitAll()
+                .antMatchers("/login.html","/login", "/getCaptchaCode","/smscode","/smslogin","/logoutSuccessUrl.html").permitAll()
                 .antMatchers("/index").authenticated()
                 .anyRequest().access("@rbacService.hasPermission(request,authentication)")
                 // <---------------之前的静态加载start-------------------->
