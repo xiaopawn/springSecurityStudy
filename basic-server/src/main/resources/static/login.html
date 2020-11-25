@@ -16,6 +16,14 @@
     <label><input type="checkbox" name="remember-me" id="remember-me">记住密码</label>
 </form>
 
+<h1>短信登陆</h1>
+<form action="/smslogin" method="post">
+    <span>手机号码：</span><input type="text" name="mobile" id="mobile"> <br>
+    <span>短信验证码：</span><input type="text" name="smsCode" id="smsCode" >
+    <input type="button" onclick="getSmsCode()" value="获取"><br>
+    <input type="button" onclick="smslogin()" value="登陆">
+</form>
+
 <script>
 
     window.onload = function (){
@@ -50,6 +58,53 @@
                     alert(json.message)
                 }
 
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+    }
+
+    function getSmsCode() {
+        $.ajax({
+            type: "get",
+            url: "/getSmsCode",
+            data: {
+                "mobile": $("#mobile").val()
+            },
+            success: function (json) {
+                if(json.isok){
+                    alert(json.data)
+                }else{
+                    alert(json.message)
+                }
+            },
+            error: function (e) {
+                console.log(e.responseText);
+            }
+        });
+    }
+
+    function smslogin() {
+        var mobile = $("#mobile").val();
+        var smsCode = $("#smsCode").val();
+        if (mobile === "" || smsCode === "") {
+            alert('手机号和短信验证码均不能为空');
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/smslogin",
+            data: {
+                "mobile": mobile,
+                "smsCode": smsCode
+            },
+            success: function (json) {
+                if(json.isok){
+                    location.href = json.data;
+                }else{
+                    alert(json.message)
+                }
             },
             error: function (e) {
                 console.log(e.responseText);
