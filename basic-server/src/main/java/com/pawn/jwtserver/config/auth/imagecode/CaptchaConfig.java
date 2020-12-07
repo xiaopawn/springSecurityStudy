@@ -33,7 +33,7 @@ public class CaptchaConfig {
     private String fontSize;
 
     @Bean(name = "captchaProducer")
-    public DefaultKaptcha getKaptchaBean(){
+    public DefaultKaptcha getCaptchaBean(){
 
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
 
