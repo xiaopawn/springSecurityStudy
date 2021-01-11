@@ -10,6 +10,7 @@
     <modules>
         <module>basic-server</module>
         <module>commons-spring-boot-starter</module>
+        <module>jwt-server</module>
     </modules>
     <packaging>pom</packaging>
 
